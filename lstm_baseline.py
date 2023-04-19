@@ -6,20 +6,20 @@ import gc
 import shutil
 import cv2
 import tensorflow as tf
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 from sklearn.model_selection import train_test_split
-from tensorflow.keras import backend as K
-from tensorflow.keras.layers import LSTM
-from tensorflow.keras.layers import BatchNormalization
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.layers import Dropout
-from tensorflow.keras.layers import Input
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Activation
-import tensorflow.keras
-from tensorflow.keras.callbacks import ModelCheckpoint
+from keras import backend as K
+from keras.layers import LSTM
+from keras.layers import BatchNormalization
+from keras.layers import Dense
+from keras.layers import Dropout
+from keras.layers import Input
+from keras.models import Model
+from keras.layers import Activation
+import keras
+from keras.callbacks import ModelCheckpoint
 from sklearn.model_selection import KFold
-import tensorflow.keras.metrics
+import keras.metrics
 from sklearn.metrics import roc_curve, auc
 from sklearn.metrics import make_scorer
 from sklearn.utils import shuffle
@@ -30,7 +30,7 @@ from utils import my_precision,my_recall,my_f1,my_roc_auc,get_specificity,get_ba
 
 warnings.filterwarnings('always')
 
-path = "melspectrogram_spec_aug_30_percent_randomly_freq_time_masking/melspectrograms/"
+path = "D:/Data/melspectrogram_spec_aug_30_percent_randomly_freq_time_masking/melspectrograms"
 names = sorted(os.listdir(path), key=lambda x: int(os.path.splitext(x)[0]))
 imgArraySize = (88,39)
 
@@ -48,7 +48,7 @@ for filename in progressBar(names, prefix = 'Reading:', suffix = '', length = 50
 
 images = np.squeeze(images)
 # Loading Labels
-labels = pd.read_csv('labels.csv')
+labels = pd.read_csv('D:/Data/labels.csv')
 labels.columns = ['label']
 covid_status = labels["label"]
 covid_status = np.asarray(covid_status)
@@ -89,7 +89,7 @@ scoring = {'accuracy': 'accuracy',
            'balanced_accuracy': 'balanced_accuracy'}
 
 ## Empty /kaggle/working + Free memory usage
-folder = './'
+folder = 'D:/Data/res'
 for filename in os.listdir(folder):
     file_path = os.path.join(folder, filename)
     try:
@@ -118,10 +118,10 @@ loss_per_fold = []
 histories = []
 
 METRICS = [
-    tensorflow.keras.metrics.BinaryAccuracy(name='accuracy'),
-    tensorflow.keras.metrics.Precision(name='precision'),
-    tensorflow.keras.metrics.Recall(name='recall'),
-    tensorflow.keras.metrics.AUC(name='AUC')
+    keras.metrics.BinaryAccuracy(name='accuracy'),
+    keras.metrics.Precision(name='precision'),
+    keras.metrics.Recall(name='recall'),
+    keras.metrics.AUC(name='AUC')
 ]
 
 kfold = KFold(n_splits=num_folds, shuffle=True,random_state=75)
@@ -130,7 +130,7 @@ for train,test in kfold.split(trainX,trainY):
     epochs = 500
     batch_size = 256
     learning_rate = 0.001
-    optimizer = tensorflow.keras.optimizers.Adamax(learning_rate = learning_rate)
+    optimizer = keras.optimizers.Adamax(learning_rate = learning_rate)
     filepath="model_best_weights_"+str(fold_no)+".hdf5"    
     checkpoint = ModelCheckpoint(filepath, monitor='val_accuracy', verbose=1, save_best_only=True, mode='max')
     ###### Model architecture

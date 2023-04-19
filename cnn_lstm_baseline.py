@@ -6,23 +6,23 @@ import gc
 import shutil
 import cv2
 import tensorflow as tf
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 from sklearn.model_selection import train_test_split
-from tensorflow.keras import backend as K
-from tensorflow.keras.layers import Conv2D
-from tensorflow.keras.layers import AveragePooling2D
-from tensorflow.keras.layers import Reshape
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.layers import Dropout
-from tensorflow.keras.layers import Input
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Activation
-from tensorflow.keras.layers import BatchNormalization
-from tensorflow.keras.layers import LSTM
-import tensorflow.keras
-from tensorflow.keras.callbacks import ModelCheckpoint
+from keras import backend as K
+from keras.layers import Conv2D
+from keras.layers import AveragePooling2D
+from keras.layers import Reshape
+from keras.layers import Dense
+from keras.layers import Dropout
+from keras.layers import Input
+from keras.models import Model
+from keras.layers import Activation
+from keras.layers import BatchNormalization
+from keras.layers import LSTM
+import keras
+from keras.callbacks import ModelCheckpoint
 from sklearn.model_selection import KFold
-import tensorflow.keras.metrics
+import keras.metrics
 from sklearn.metrics import make_scorer
 from sklearn.metrics import roc_curve, auc
 from sklearn.utils import shuffle
@@ -122,10 +122,10 @@ loss_per_fold = []
 histories = []
 
 METRICS = [
-    tensorflow.keras.metrics.BinaryAccuracy(name='accuracy'),
-    tensorflow.keras.metrics.Precision(name='precision'),
-    tensorflow.keras.metrics.Recall(name='recall'),
-    tensorflow.keras.metrics.AUC(name='AUC')
+    keras.metrics.BinaryAccuracy(name='accuracy'),
+    keras.metrics.Precision(name='precision'),
+    keras.metrics.Recall(name='recall'),
+    keras.metrics.AUC(name='AUC')
 ]
 
 kfold = KFold(n_splits=num_folds, shuffle=True,random_state=75)
@@ -134,7 +134,7 @@ for train,test in kfold.split(trainX,trainY):
     epochs = 500
     batch_size = 256
     learning_rate = 0.001
-    optimizer = tensorflow.keras.optimizers.Adamax(learning_rate = learning_rate)
+    optimizer = keras.optimizers.Adamax(learning_rate = learning_rate)
     filepath="model_best_weights_"+str(fold_no)+".hdf5"    
     checkpoint = ModelCheckpoint(filepath, monitor='val_accuracy', verbose=1, save_best_only=True, mode='max')
     ###### Model architecture

@@ -6,21 +6,21 @@ import gc
 import shutil
 import cv2
 import tensorflow as tf
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 from sklearn.model_selection import train_test_split
-from tensorflow.keras import backend as K
-from tensorflow.keras.layers import Conv2D
-from tensorflow.keras.layers import AveragePooling2D
-from tensorflow.keras.layers import Flatten
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.layers import Dropout
-from tensorflow.keras.layers import Input
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Activation
+from keras import backend as K
+from keras.layers import Conv2D
+from keras.layers import AveragePooling2D
+from keras.layers import Flatten
+from keras.layers import Dense
+from keras.layers import Dropout
+from keras.layers import Input
+from keras.models import Model
+from keras.layers import Activation
 import tensorflow.keras
-from tensorflow.keras.callbacks import ModelCheckpoint
+from keras.callbacks import ModelCheckpoint
 from sklearn.model_selection import KFold
-import tensorflow.keras.metrics
+import keras.metrics
 from sklearn.metrics import make_scorer
 from sklearn.metrics import roc_curve, auc
 from sklearn.utils import shuffle

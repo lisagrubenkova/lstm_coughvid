@@ -1,5 +1,5 @@
-from tensorflow.keras.layers import Layer
-from tensorflow.keras import backend as K
+from keras.layers import Layer
+from keras import backend as K
 
 class AttentionLayer(Layer):
     def __init__(self, return_sequences=True,**kwargs):
