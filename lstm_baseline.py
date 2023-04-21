@@ -30,7 +30,7 @@ from utils import my_precision,my_recall,my_f1,my_roc_auc,get_specificity,get_ba
 
 warnings.filterwarnings('always')
 
-path = "D:/Data/melspectrogram_spec_aug_30_percent_randomly_freq_time_masking/melspectrograms"
+path = "Data/melspectrogram_spec_aug_30_percent_randomly_freq_time_masking/melspectrograms"
 names = sorted(os.listdir(path), key=lambda x: int(os.path.splitext(x)[0]))
 imgArraySize = (88,39)
 
@@ -48,7 +48,7 @@ for filename in progressBar(names, prefix = 'Reading:', suffix = '', length = 50
 
 images = np.squeeze(images)
 # Loading Labels
-labels = pd.read_csv('D:/Data/labels.csv')
+labels = pd.read_csv('Data/labels.csv')
 labels.columns = ['label']
 covid_status = labels["label"]
 covid_status = np.asarray(covid_status)
@@ -89,7 +89,7 @@ scoring = {'accuracy': 'accuracy',
            'balanced_accuracy': 'balanced_accuracy'}
 
 ## Empty /kaggle/working + Free memory usage
-folder = 'D:/Data/res'
+folder = 'Data/res'
 for filename in os.listdir(folder):
     file_path = os.path.join(folder, filename)
     try:

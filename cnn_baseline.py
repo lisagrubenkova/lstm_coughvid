@@ -91,7 +91,7 @@ scoring = {'accuracy': 'accuracy',
            'balanced_accuracy': 'balanced_accuracy'}
 
 ## Empty /kaggle/working + Free memory usage
-folder = 'D:/Data/res'
+folder = 'Data/res'
 for filename in os.listdir(folder):
     file_path = os.path.join(folder, filename)
     try:
@@ -106,7 +106,7 @@ gc.collect()
 
 ## Start 10-fold cross-validation
 
-num_folds = 1
+num_folds = 2
 fold_no = 1
 
 acc_per_fold = []

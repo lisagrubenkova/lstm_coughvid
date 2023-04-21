@@ -34,7 +34,7 @@ warnings.filterwarnings('always')
 
 #### Useful functions
 
-path = "melspectrogram_spec_aug_30_percent_randomly_freq_time_masking/melspectrograms/"
+path = "Data/melspectrogram_spec_aug_30_percent_randomly_freq_time_masking/melspectrograms/"
 names = sorted(os.listdir(path), key=lambda x: int(os.path.splitext(x)[0]))
 imgArraySize = (88,39)
 
@@ -52,7 +52,7 @@ for filename in progressBar(names, prefix = 'Reading:', suffix = '', length = 50
 
 images = np.squeeze(images)
 # Loading Labels
-labels = pd.read_csv('labels.csv')
+labels = pd.read_csv('Data/labels.csv')
 labels.columns = ['label']
 covid_status = labels["label"]
 covid_status = np.asarray(covid_status)
@@ -93,7 +93,7 @@ scoring = {'accuracy': 'accuracy',
            'balanced_accuracy': 'balanced_accuracy'}
 
 ## Empty /kaggle/working + Free memory usage
-folder = './'
+folder = 'Data/res'
 for filename in os.listdir(folder):
     file_path = os.path.join(folder, filename)
     try:
@@ -108,7 +108,7 @@ gc.collect()
 
 ## Start 10-fold cross-validation
 
-num_folds = 10
+num_folds = 2
 fold_no = 1
 
 acc_per_fold = []
