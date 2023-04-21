@@ -17,7 +17,7 @@ from keras.layers import Dropout
 from keras.layers import Input
 from keras.models import Model
 from keras.layers import Activation
-import tensorflow.keras
+import keras
 from keras.callbacks import ModelCheckpoint
 from sklearn.model_selection import KFold
 import keras.metrics
@@ -32,7 +32,7 @@ warnings.filterwarnings('always')
 
 #### Useful functions
 
-path = "melspectrogram_spec_aug_30_percent_randomly_freq_time_masking/melspectrograms/"
+path = "Data/melspectrogram_spec_aug_30_percent_randomly_freq_time_masking/melspectrograms/"
 names = sorted(os.listdir(path), key=lambda x: int(os.path.splitext(x)[0]))
 imgArraySize = (88,39)
 
@@ -50,7 +50,7 @@ for filename in progressBar(names, prefix = 'Reading:', suffix = '', length = 50
 
 images = np.squeeze(images)
 # Loading Labels
-labels = pd.read_csv('labels.csv')
+labels = pd.read_csv('Data/labels.csv')
 labels.columns = ['label']
 covid_status = labels["label"]
 covid_status = np.asarray(covid_status)
@@ -91,7 +91,7 @@ scoring = {'accuracy': 'accuracy',
            'balanced_accuracy': 'balanced_accuracy'}
 
 ## Empty /kaggle/working + Free memory usage
-folder = './'
+folder = 'D:/Data/res'
 for filename in os.listdir(folder):
     file_path = os.path.join(folder, filename)
     try:
@@ -106,7 +106,7 @@ gc.collect()
 
 ## Start 10-fold cross-validation
 
-num_folds = 10
+num_folds = 1
 fold_no = 1
 
 acc_per_fold = []
@@ -120,10 +120,10 @@ loss_per_fold = []
 histories = []
 
 METRICS = [
-    tensorflow.keras.metrics.BinaryAccuracy(name='accuracy'),
-    tensorflow.keras.metrics.Precision(name='precision'),
-    tensorflow.keras.metrics.Recall(name='recall'),
-    tensorflow.keras.metrics.AUC(name='AUC')
+    keras.metrics.BinaryAccuracy(name='accuracy'),
+    keras.metrics.Precision(name='precision'),
+    keras.metrics.Recall(name='recall'),
+    keras.metrics.AUC(name='AUC')
 ]
 
 kfold = KFold(n_splits=num_folds, shuffle=True,random_state=75)
@@ -132,7 +132,7 @@ for train,test in kfold.split(trainX,trainY):
     epochs = 500
     batch_size = 256
     learning_rate = 0.001
-    optimizer = tensorflow.keras.optimizers.Adamax(learning_rate = learning_rate)
+    optimizer = keras.optimizers.Adamax(learning_rate = learning_rate)
     filepath="model_best_weights_"+str(fold_no)+".hdf5"    
     checkpoint = ModelCheckpoint(filepath, monitor='val_accuracy', verbose=1, save_best_only=True, mode='max')
     ###### Model architecture

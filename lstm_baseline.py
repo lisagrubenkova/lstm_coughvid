@@ -104,7 +104,7 @@ gc.collect()
 
 ## Start 10-fold cross-validation
 
-num_folds = 10
+num_folds = 2
 fold_no = 1
 
 acc_per_fold = []
